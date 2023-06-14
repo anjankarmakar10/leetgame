@@ -16,8 +16,12 @@ const useGames = () => {
       .then(({ data }) => {
         setGames(data);
         setLoading(false);
+        setError("");
       })
-      .catch((error) => setError(error.message));
+      .catch((error) => {
+        if (error.message instanceof controller) return;
+        setError(error.message);
+      });
 
     return () => controller.abort();
   }, []);
