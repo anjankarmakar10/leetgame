@@ -21,6 +21,7 @@ const useGames = () => {
       .catch((error) => {
         if (error.message instanceof controller) return;
         setError(error.message);
+        setLoading(false);
       });
 
     return () => controller.abort();
