@@ -5,10 +5,12 @@ import GenreListSkeleton from "./GenreListSkeleton";
 import { useApp } from "../contexts/AppProvider";
 
 const GenreList = () => {
-  const { genres, loading } = useGenres();
+  const { genres, loading, error } = useGenres();
   const genreSkeletons = Array(12).fill("🔥");
 
   const { selectedGenre, setSelectedGenre } = useApp();
+
+  if (error) return null;
 
   return (
     <List>
