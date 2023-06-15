@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
   const [selectedGenre, setSelectedGenre] = useState(null);
   const [selectedPlatform, setSelectedPlatform] = useState(null);
   const [selectedSrot, setSelectedSort] = useState(null);
+  const [searchValue, setSearchValue] = useState(null);
 
   const value = {
     selectedGenre,
@@ -16,6 +17,8 @@ const AppProvider = ({ children }) => {
     setSelectedPlatform,
     selectedSrot,
     setSelectedSort,
+    searchValue,
+    setSearchValue,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;

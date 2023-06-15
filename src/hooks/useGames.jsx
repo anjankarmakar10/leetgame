@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
-const useGames = (selectedGenre, selectedPlatform, selectedSrot) => {
+const useGames = (
+  selectedGenre,
+  selectedPlatform,
+  selectedSrot,
+  searchValue
+) => {
   const [games, setGames] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -16,6 +21,7 @@ const useGames = (selectedGenre, selectedPlatform, selectedSrot) => {
           genres: selectedGenre?.id,
           platforms: selectedPlatform?.id,
           ordering: selectedSrot?.value,
+          search: searchValue,
         },
       })
       .then(({ data }) => {
@@ -30,7 +36,12 @@ const useGames = (selectedGenre, selectedPlatform, selectedSrot) => {
       });
 
     return () => controller.abort();
-  }, [selectedGenre?.id, selectedPlatform?.id, selectedSrot?.value]);
+  }, [
+    selectedGenre?.id,
+    selectedPlatform?.id,
+    selectedSrot?.value,
+    searchValue,
+  ]);
 
   return { games, loading, error };
 };

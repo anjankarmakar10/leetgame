@@ -5,11 +5,13 @@ import getCroppedImageUrl from "../services/image-url";
 
 const GameCard = ({ game }) => {
   return (
-    <Card>
+    <Card minHeight={"305px"}>
       <Image src={getCroppedImageUrl(game?.background_image)} />
       <CardBody>
-        <Heading fontSize="2xl">{game?.name}</Heading>
-        <HStack justifyContent="space-between">
+        <Heading noOfLines={2} fontSize="2xl">
+          {game?.name}
+        </Heading>
+        <HStack marginTop={"2px"} justifyContent="space-between">
           <PlatformIconList platforms={game?.parent_platforms} />
           <CriticScore score={game?.metacritic} />
         </HStack>
