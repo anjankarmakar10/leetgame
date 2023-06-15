@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
-const useGames = (selectedGenre) => {
+const useGames = (selectedGenre, selectedPlatform) => {
   const [games, setGames] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
@@ -12,7 +12,7 @@ const useGames = (selectedGenre) => {
     apiClient
       .get("/games", {
         signal: controller.signal,
-        params: { genres: selectedGenre?.id },
+        params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id },
       })
       .then(({ data }) => {
         setGames(data);
@@ -26,7 +26,7 @@ const useGames = (selectedGenre) => {
       });
 
     return () => controller.abort();
-  }, [selectedGenre?.id]);
+  }, [selectedGenre?.id, selectedPlatform?.id]);
 
   return { games, loading, error };
 };

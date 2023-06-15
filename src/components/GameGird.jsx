@@ -6,8 +6,8 @@ import GameCardContainer from "./GameCardContainer";
 import { useApp } from "../contexts/AppProvider";
 
 const GameGird = () => {
-  const { selectedGenre } = useApp();
-  const { games, error, loading } = useGames(selectedGenre);
+  const { selectedGenre, selectedPlatform } = useApp();
+  const { games, error, loading } = useGames(selectedGenre, selectedPlatform);
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
   return (
