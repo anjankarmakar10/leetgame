@@ -8,7 +8,7 @@ const GenreList = () => {
   const { genres, loading } = useGenres();
   const genreSkeletons = Array(12).fill("🔥");
 
-  const { setSelectedGenre } = useApp();
+  const { selectedGenre, setSelectedGenre } = useApp();
 
   return (
     <List>
@@ -27,6 +27,7 @@ const GenreList = () => {
               onClick={() => setSelectedGenre(genre)}
               variant={"link"}
               fontSize={"lg"}
+              fontWeight={genre?.id === selectedGenre?.id ? "bold" : "normal"}
             >
               {genre?.name}
             </Button>
