@@ -1,4 +1,7 @@
 const getCroppedImageUrl = (url) => {
+  if (!url)
+    return "https://raw.githubusercontent.com/mosh-hamedani/game-hub/main/src/assets/no-image-placeholder.webp";
+
   const target = "media/";
   const index = url?.indexOf(target) + target?.length;
 
