@@ -29,7 +29,7 @@ const GenreList = () => {
           genreSkeletons.map((item, index) => (
             <GenreListSkeleton key={index} />
           ))}
-        {genres?.results?.map((genre) => (
+        {genres?.map((genre) => (
           <ListItem paddingY={"5px"} key={genre.id}>
             <HStack>
               <Image
