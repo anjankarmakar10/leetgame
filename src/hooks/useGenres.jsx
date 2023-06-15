@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
 
-const useGames = () => {
-  const [games, setGames] = useState(null);
+const useGenres = () => {
+  const [genres, setGenres] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
@@ -10,11 +10,11 @@ const useGames = () => {
     const controller = new AbortController();
     setLoading(true);
     apiClient
-      .get("/games", {
+      .get("/genres", {
         signal: controller.signal,
       })
       .then(({ data }) => {
-        setGames(data);
+        setGenres(data);
         setLoading(false);
         setError("");
       })
@@ -27,7 +27,7 @@ const useGames = () => {
     return () => controller.abort();
   }, []);
 
-  return { games, loading, error };
+  return { genres, loading, error };
 };
 
-export default useGames;
+export default useGenres;
