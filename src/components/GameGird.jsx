@@ -3,10 +3,12 @@ import useGames from "../hooks/useGames";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 import GameCardContainer from "./GameCardContainer";
+import { useApp } from "../contexts/AppProvider";
 
 const GameGird = () => {
   const { games, error, loading } = useGames();
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
+  const { selectedGenre } = useApp();
 
   return (
     <>
