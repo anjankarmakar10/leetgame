@@ -23,6 +23,7 @@ const GenreList = () => {
               src={getCroppedImageUrl(genre?.image_background)}
             />
             <Button
+              whiteSpace={"normal"}
               onClick={() => setSelectedGenre(genre)}
               variant={"link"}
               fontSize={"lg"}
