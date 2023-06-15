@@ -5,16 +5,16 @@ import getCroppedImageUrl from "../services/image-url";
 
 const GameCard = ({ game }) => {
   return (
-    <Card minHeight={"305px"}>
+    <Card minHeight={"316px"}>
       <Image src={getCroppedImageUrl(game?.background_image)} />
       <CardBody>
-        <Heading noOfLines={2} fontSize="2xl">
-          {game?.name}
-        </Heading>
-        <HStack marginTop={"2px"} justifyContent="space-between">
+        <HStack marginBottom={3} justifyContent="space-between">
           <PlatformIconList platforms={game?.parent_platforms} />
           <CriticScore score={game?.metacritic} />
         </HStack>
+        <Heading noOfLines={2} fontSize="2xl">
+          {game?.name}
+        </Heading>
       </CardBody>
     </Card>
   );

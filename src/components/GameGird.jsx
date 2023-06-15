@@ -23,7 +23,7 @@ const GameGird = () => {
       <SimpleGrid
         padding={"10px"}
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
-        spacing="10px"
+        spacing={4}
       >
         {loading &&
           skeletons.map((item) => (
