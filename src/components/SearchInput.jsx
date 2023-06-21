@@ -7,14 +7,14 @@ const SearchInput = () => {
   const ref = useRef();
   const { setSearchValue } = useApp();
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const value = ref.current.value;
+    setSearchValue(value);
+  };
+
   return (
-    <form
-      onSubmit={(event) => {
-        event.preventDefault();
-        const value = ref.current.value;
-        setSearchValue(value);
-      }}
-    >
+    <form onSubmit={handleSubmit}>
       <InputGroup>
         <InputLeftElement children={<BsSearch />} />
         <Input
