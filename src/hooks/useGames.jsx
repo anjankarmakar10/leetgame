@@ -19,7 +19,7 @@ const useGames = (
         signal: controller.signal,
         params: {
           genres: selectedGenre?.id,
-          platforms: selectedPlatform?.id,
+          parent_platforms: selectedPlatform?.id,
           ordering: selectedSrot?.value,
           search: searchValue,
         },

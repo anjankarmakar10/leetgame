@@ -12,7 +12,7 @@ import GenreListSkeleton from "./GenreListSkeleton";
 import { useApp } from "../contexts/AppProvider";
 
 const GenreList = () => {
-  const { genres, loading, error } = useGenres();
+  const { data, isLoading, error } = useGenres();
   const genreSkeletons = Array(12).fill("🔥");
 
   const { selectedGenre, setSelectedGenre } = useApp();
@@ -25,11 +25,11 @@ const GenreList = () => {
         Genres
       </Heading>
       <List>
-        {loading &&
+        {isLoading &&
           genreSkeletons.map((item, index) => (
             <GenreListSkeleton key={index} />
           ))}
-        {genres?.map((genre) => (
+        {data?.map((genre) => (
           <ListItem paddingY={"5px"} key={genre.id}>
             <HStack>
               <Image
