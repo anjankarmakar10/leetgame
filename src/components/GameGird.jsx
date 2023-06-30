@@ -8,7 +8,7 @@ import { useApp } from "../contexts/AppProvider";
 const GameGird = () => {
   const { selectedGenre, selectedPlatform, selectedSrot, searchValue } =
     useApp();
-  const { games, error, loading } = useGames(
+  const { data, error, isLoading } = useGames(
     selectedGenre,
     selectedPlatform,
     selectedSrot,
@@ -25,13 +25,13 @@ const GameGird = () => {
         columns={{ sm: 1, md: 2, lg: 3, xl: 4 }}
         spacing={4}
       >
-        {loading &&
+        {isLoading &&
           skeletons.map((item) => (
             <GameCardContainer key={item}>
               <GameCardSkeleton />
             </GameCardContainer>
           ))}
-        {games?.results.map((game) => (
+        {data?.map((game) => (
           <GameCardContainer key={game.id}>
             <GameCard game={game} />
           </GameCardContainer>

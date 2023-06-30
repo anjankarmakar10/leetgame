@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
 import apiClient from "../services/api-client";
+import { useQuery } from "@tanstack/react-query";
 
 const useGames = (
   selectedGenre,
@@ -7,43 +7,27 @@ const useGames = (
   selectedSrot,
   searchValue
 ) => {
-  const [games, setGames] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
-
-  useEffect(() => {
-    const controller = new AbortController();
-    setLoading(true);
-    apiClient
-      .get("/games", {
-        signal: controller.signal,
-        params: {
-          genres: selectedGenre?.id,
-          parent_platforms: selectedPlatform?.id,
-          ordering: selectedSrot?.value,
-          search: searchValue,
-        },
-      })
-      .then(({ data }) => {
-        setGames(data);
-        setLoading(false);
-        setError("");
-      })
-      .catch((error) => {
-        if (error.message === "canceled") return;
-        setError(error.message);
-        setLoading(false);
-      });
-
-    return () => controller.abort();
-  }, [
-    selectedGenre?.id,
-    selectedPlatform?.id,
-    selectedSrot?.value,
+  const gameQuery = {
+    selectedGenre,
+    selectedPlatform,
+    selectedSrot,
     searchValue,
-  ]);
+  };
 
-  return { games, loading, error };
+  return useQuery({
+    queryKey: ["games", gameQuery],
+    queryFn: () =>
+      apiClient
+        .get("/games", {
+          params: {
+            genres: selectedGenre?.id,
+            parent_platforms: selectedPlatform?.id,
+            ordering: selectedSrot?.value,
+            search: searchValue,
+          },
+        })
+        .then((res) => res?.data?.results),
+  });
 };
 
 export default useGames;
