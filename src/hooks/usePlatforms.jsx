@@ -9,7 +9,7 @@ const usePlatforms = () => {
       apiClient
         .get("/platforms/lists/parents")
         .then((res) => res?.data?.results),
-    staleTime: 24 * 60 * 60 * 1000,
+    staleTime: 24 * 60 * 60 * 1000, // 24h
     initialData: platforms,
   });
 };
