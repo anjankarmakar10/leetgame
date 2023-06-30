@@ -4,7 +4,7 @@ import usePlatforms from "../hooks/usePlatforms";
 import { useApp } from "../contexts/AppProvider";
 
 const PlatformSelector = () => {
-  const { platforms, error } = usePlatforms();
+  const { data, error } = usePlatforms();
   const { selectedPlatform, setSelectedPlatform } = useApp();
 
   if (error) return null;
@@ -15,7 +15,7 @@ const PlatformSelector = () => {
         {selectedPlatform?.name || "Platforms"}
       </MenuButton>
       <MenuList>
-        {platforms?.map((platform) => (
+        {data?.map((platform) => (
           <MenuItem
             onClick={() => setSelectedPlatform(platform)}
             key={platform?.id}
