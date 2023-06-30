@@ -1,5 +1,5 @@
 import apiClient from "../services/api-client";
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 
 const useGames = (
   selectedGenre,
@@ -14,9 +14,9 @@ const useGames = (
     searchValue,
   };
 
-  return useQuery({
+  return useInfiniteQuery({
     queryKey: ["games", gameQuery],
-    queryFn: () =>
+    queryFn: ({ pageParam = 1 }) =>
       apiClient
         .get("/games", {
           params: {
@@ -24,9 +24,13 @@ const useGames = (
             parent_platforms: selectedPlatform?.id,
             ordering: selectedSrot?.value,
             search: searchValue,
+            page: pageParam,
           },
         })
-        .then((res) => res?.data?.results),
+        .then((res) => res?.data),
+    getNextPageParam: (lastPage, allPages) => {
+      return lastPage?.next ? allPages.length + 1 : undefined;
+    },
   });
 };
 
